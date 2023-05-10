@@ -74,24 +74,24 @@ function startGame() {
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
       const emoji = emojis[col];
-      const posX = (elementsSize.toFixed(3)) * (colI + 1);
-      const posY = (elementsSize.toFixed(3)) * (rowI + 1);
+      const posX = elementsSize.toFixed(3) * (colI + 1);
+      const posY = elementsSize.toFixed(3) * (rowI + 1);
       if (col == "O") {
         //Condicional para que cuando se reinicie no se elimine el jugador
         if (!playerPosition.x && !playerPosition.y) {
           playerPosition.x = posX;
           playerPosition.y = posY;
         }
-      } else if (col == 'I') {
+      } else if (col == "I") {
         giftPosition.x = posX;
         giftPosition.y = posY;
-      } else if (col == 'X') {
+      } else if (col == "X") {
         enemyPositions.push({
           x: posX,
           y: posY,
         });
       }
-      
+
       game.fillText(emoji, posX, posY);
     });
   });
