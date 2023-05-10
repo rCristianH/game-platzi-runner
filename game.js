@@ -32,16 +32,23 @@ window.addEventListener("load", setCanvasSize);
 window.addEventListener("resize", setCanvasSize);
 showRecord();
 
+function fixNumber(n) {
+  return Number(n.toFixed(2));
+}
+
 function setCanvasSize() {
   if (window.innerHeight > window.innerWidth) {
-    canvasSize = window.innerWidth * 0.8;
+    canvasSize = window.innerWidth * 0.7;
   } else {
-    canvasSize = window.innerHeight * 0.8;
+    canvasSize = window.innerHeight * 0.7;
   }
+  canvasSize = Number(canvasSize.toFixed(0));
   canvas.setAttribute("width", canvasSize);
   canvas.setAttribute("height", canvasSize);
 
   elementsSize = canvasSize / 10;
+  playerPosition.x = undefined;
+  playerPosition.y = undefined;
   startGame();
 }
 function startGame() {
@@ -67,28 +74,28 @@ function startGame() {
   mapRowCols.forEach((row, rowI) => {
     row.forEach((col, colI) => {
       const emoji = emojis[col];
-      const posX = elementsSize * (colI + 1);
-      const posY = elementsSize * (rowI + 1);
-
+      const posX = (elementsSize.toFixed(3)) * (colI + 1);
+      const posY = (elementsSize.toFixed(3)) * (rowI + 1);
       if (col == "O") {
         //Condicional para que cuando se reinicie no se elimine el jugador
         if (!playerPosition.x && !playerPosition.y) {
           playerPosition.x = posX;
           playerPosition.y = posY;
         }
-      } else if (col == "I") {
+      } else if (col == 'I') {
         giftPosition.x = posX;
         giftPosition.y = posY;
-      } else if (col == "X") {
+      } else if (col == 'X') {
         enemyPositions.push({
           x: posX,
           y: posY,
         });
       }
-
+      
       game.fillText(emoji, posX, posY);
     });
   });
+
   movePlayer();
 }
 
