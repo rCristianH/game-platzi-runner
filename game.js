@@ -98,6 +98,43 @@ function startGame() {
 
   movePlayer();
 }
+function animation(i) {
+  const map = maps[i];
+  const mapRows = map.trim().split("\n");
+  const mapRowCols = mapRows.map((row) => row.trim().split(""));
+
+  game.clearRect(0, 0, canvasSize, canvasSize);
+  /* For anidado que rellena la grilla del juego reemplazando los caracteres por emojis */
+  mapRowCols.forEach((row, rowI) => {
+    row.forEach((col, colI) => {
+      const emoji = emojis[col];
+      const posX = elementsSize.toFixed(3) * (colI + 1);
+      const posY = elementsSize.toFixed(3) * (rowI + 1);
+      if (col == "O") {
+        //Condicional para que cuando se reinicie no se elimine el jugador
+        if (!playerPosition.x && !playerPosition.y) {
+          playerPosition.x = posX;
+          playerPosition.y = posY;
+        }
+      } else if (col == "I") {
+        giftPosition.x = posX;
+        giftPosition.y = posY;
+      } else if (col == "X") {
+        enemyPositions.push({
+          x: posX,
+          y: posY,
+        });
+      }
+
+      game.fillText(emoji, posX, posY);
+    });
+  });
+  /* setTimeout(() => {
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    startGame();
+  }, 500); */
+}
 
 function movePlayer() {
   if (playerPosition.x < elementsSize) playerPosition.x = elementsSize;
@@ -138,7 +175,11 @@ function levelFail() {
     level = 0;
     lives = 3;
     timeStart = undefined;
+    setTimeout(() => {
+      animation(3);
+    }, 100);
   }
+
   playerPosition.x = undefined;
   playerPosition.y = undefined;
   startGame();
@@ -154,8 +195,15 @@ function gameWin() {
   console.log(localStorage.getItem("recordTime"));
   clearInterval(timeInterval);
   setTimeout(() => {
-    lives = 0;
-    levelFail();
+    animation(4);
+  }, 100);
+  setTimeout(() => {
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    level = 0;
+    lives = 3;
+    timeStart = undefined;
+    startGame();
   }, 3000);
 }
 function showLives() {

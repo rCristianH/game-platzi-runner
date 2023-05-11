@@ -5,8 +5,8 @@ const emojis = {
   I: "🎁️",
   PLAYER: "😃️",
   BOMB_COLLISION: "⭕",
-  GAME_OVER: "💥️",
-  WIN: "🏆️",
+  G: "💥️",
+  W: "🏆️",
   HEART: "❤️",
 };
 const maps = [];
@@ -45,4 +45,28 @@ maps.push(`
   XX-XXXXXXX
   XX-----OXX
   XXXXXXXXXX
+`);
+maps.push(`
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+  GGGGGGGGGG
+`);
+maps.push(`
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
+  WWWWWWWWWW
 `);
